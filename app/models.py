@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Float
 from sqlalchemy.orm import relationship
+from sqlalchemy.types import Date
 from app.database import Base
 
 class Donor(Base):
@@ -16,7 +17,7 @@ class Donation(Base):
     id = Column(Integer, primary_key=True, index=True)
     amount = Column(Float, nullable=False)
     method = Column(String, nullable=False)
-    date = Column(String, nullable=False)
+    date = Column(Date, nullable=False)
     donor_id = Column(Integer, ForeignKey("donors.id"))
 
     donor = relationship("Donor", back_populates="donations")

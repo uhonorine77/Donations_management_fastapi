@@ -17,6 +17,9 @@ def create_user(db: Session, user: schemas.UserCreate):
 def get_donations(db: Session):
     return db.query(models.Donation).all()
 
+def get_donation_by_id(db: Session, donation_id: int):
+    return db.query(models.Donation).filter(models.Donation.id == donation_id).first()
+
 def create_donation(db: Session, donation: schemas.DonationCreate, donor_id: int):
     db_donation = models.Donation(
         amount=donation.amount,

@@ -25,7 +25,7 @@ def get_users(db: Session = Depends(get_db)):
     return [schemas.User(id=user.id, username=user.name, is_admin=user.is_admin) for user in users]
 
 
-@router.get("/users/list/{user_id}", response_model=schemas.User)
+@router.get("/users/{user_id}/", response_model=schemas.User)
 def get_user(user_id: int, db: Session = Depends(get_db)):
     user = crud.get_user_by_id(db, user_id)
     if not user:

@@ -1,5 +1,6 @@
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional
+from datetime import date
 
 class UserBase(BaseModel):
     username: str
@@ -10,20 +11,21 @@ class UserCreate(UserBase):
 
 class User(UserBase):
     id: int
-
+    username: str
+    is_admin: Optional[int] = 0
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class DonationBase(BaseModel):
     amount: float
     method: str
-    date: str
+    date: date
 
 class DonationCreate(DonationBase):
     donor_id: int
 
 class Donation(DonationBase):
     id: int
-
+    donor_id: int
     class Config:
-        orm_mode = True
+        from_attributes = True
